@@ -4,3 +4,6 @@ leftoff
 trying to work on assmebly commands in console
 
 then get binary numbers working
+
+great idea: Use traits to implement a way Register but also I/O devices can be hooked up.  Since they are treated the same in a computer 
+(with a h0 way to access) they are perfect for traits!
