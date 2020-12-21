@@ -25,36 +25,36 @@ impl Console
 	{
 		let mut asb_line = raw_line.split(" ").peekable();
 
-		let command = asb_line.next();
-		match command
-		{
-			Some(x) => 
-					{
-						println!("THe line was {}", x);
-						// let () = x;
-						if x == str::from(".")
-						{
-							println!("made it inside");
-							return true;
-						}
-						else 
-						{
-							return false;
-						}
-					},
+		let command = asb_line.next().expect("Invalid Command Read!");
 
 
 
+		//match command
+		//{
+		//	Some(x) =>
+		//			{
+		//				println!("THe line was {}", x);
+		//				// let () = x;
+		//				if x == str::from(".")
+		//				{
+		//					println!("made it inside");
+		//					return true;
+		//				}
+		//				else
+		//				{
+		//					return false;
+		//				}
+		//			},
+		//	None =>
+		//				{    println!(
+		//						"No Command Read! \n
+		//						Command must follow 16 bit \n
+		//						Assembly provided in manual.txt"
+		//					);
+		//					return false;
+		//				},
+		//}
 
-			None => 
-						{    println!(
-								"No Command Read! \n 
-								Command must follow 16 bit \n
-								Assembly provided in manual.txt"
-							);
-							return false;
-						},
-		}
 
 		println!("should not reach here!");
 	}

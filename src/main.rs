@@ -25,7 +25,6 @@ fn main() {
 
 fn boot_up() -> console::Console
 {
-
 	console::Console::new("no file")
 }
 
@@ -34,5 +33,5 @@ fn shut_down(system: console::Console)
 {
 	system.save();
 
-	println!("Shutting down system...")
+	println!("Shutting down system...");
 }
