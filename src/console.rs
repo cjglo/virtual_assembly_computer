@@ -21,42 +21,23 @@ impl Console
 		}
 	}
 
-	pub fn handle_in(&mut self, raw_line: String) -> bool
+	pub fn handle_in(&mut self, raw_line:  &str) -> bool
 	{
-		let mut asb_line = raw_line.split(" ").peekable();
+		let mut command = raw_line.split_whitespace();
 
-		let command = asb_line.next().expect("Invalid Command Read!");
+		//// -- ASSEMBLER -- ////
+		match command.next()
+		{
+			Some(".") => println!("YEP"),
+			Some(y) => println!("didn't work"),
+			None => println!("nothing put in"),
+		}
 
-
-
-		//match command
-		//{
-		//	Some(x) =>
-		//			{
-		//				println!("THe line was {}", x);
-		//				// let () = x;
-		//				if x == str::from(".")
-		//				{
-		//					println!("made it inside");
-		//					return true;
-		//				}
-		//				else
-		//				{
-		//					return false;
-		//				}
-		//			},
-		//	None =>
-		//				{    println!(
-		//						"No Command Read! \n
-		//						Command must follow 16 bit \n
-		//						Assembly provided in manual.txt"
-		//					);
-		//					return false;
-		//				},
-		//}
 
 
 		println!("should not reach here!");
+
+		false // remove later once this function is complete -----------------------------------
 	}
 
 

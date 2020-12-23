@@ -10,9 +10,14 @@ fn main() {
 	loop 
 	{
 		let mut asb_line = String::new();
+		asb_line.clear();
 		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!");
+		// asb_line.pop();
+		// println!("What is inside is lll{}lll", asb_line);
 
-		if con.handle_in(asb_line)
+		// let mut asb_line: &str = &asb_line
+
+		if con.handle_in(&asb_line )
 		{
 			break;
 		}
