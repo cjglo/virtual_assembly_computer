@@ -1,9 +1,14 @@
 leftoff
 
 
-trying to work on assmebly commands in console
+Right now console is parsing the input to set its fields to the right commands and addresses.  Finish that up
 
-then get binary numbers working
+Execute in mem_io_interface is where console is read and executed, so just test that works.
+
+Then work on memory_io_interface to have commands work.  You could also try some dynamic memory or traits if can think of way.
+Naturally I think the velow comment might be way.  Have it send to vector of registers and io devices, and have them implent
+traits.
+
 
 great idea: Use traits to implement a way Register but also I/O devices can be hooked up.  Since they are treated the same in a computer 
 (with a h0 way to access) they are perfect for traits!

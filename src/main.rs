@@ -1,10 +1,11 @@
-mod memory;
+mod memory_io_interface;
 mod console;
 use std::io;
 
 fn main() {
 
 	let mut con = boot_up();
+	let mioi = memory_io_interface::new();
 	let _file: &str;
 
 	loop 
@@ -12,18 +13,16 @@ fn main() {
 		let mut asb_line = String::new();
 		asb_line.clear();
 		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!");
-		// asb_line.pop();
-		// println!("What is inside is lll{}lll", asb_line);
 
-		// let mut asb_line: &str = &asb_line
 
-		if con.handle_in(&asb_line )
-		{
-			break;
-		}
+		con.handle_in(&asb_line );
+		if con.op == console::AsbType::BRK { break; }
+
+		mioi.execute(&con);
+
 	}
 
-	shut_down(con);
+	mioi.shut_down();
 
 }
 
@@ -31,12 +30,4 @@ fn main() {
 fn boot_up() -> console::Console
 {
 	console::Console::new("no file")
-}
-
-
-fn shut_down(system: console::Console)
-{
-	system.save();
-
-	println!("Shutting down system...");
 }
