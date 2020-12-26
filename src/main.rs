@@ -1,11 +1,13 @@
 mod memory_io_interface;
 mod console;
+mod alu;
 use std::io;
 
 fn main() {
 
 	let mut con = boot_up();
-	let mioi = memory_io_interface::new();
+	let mioi = memory_io_interface::MemIOInterface::new();
+	let alu = alu::ArithmeticLogicUnit;
 	let _file: &str;
 
 	loop 
@@ -18,8 +20,10 @@ fn main() {
 		con.handle_in(&asb_line );
 		if con.op == console::AsbType::BRK { break; }
 
-		mioi.execute(&con);
+		alu.execute(&mioi, &con);
 
+		// FOR DEBUG ONLY CURRENTLY:
+		mioi.to_screen();
 	}
 
 	mioi.shut_down();
@@ -31,3 +35,4 @@ fn boot_up() -> console::Console
 {
 	console::Console::new("no file")
 }
+
