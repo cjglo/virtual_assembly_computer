@@ -1,4 +1,4 @@
-use super::memory;
+// use super::memory_io_interface;
 use crate::console::AsbType::INV;
 
 // computer memory set to 10 currently
@@ -54,26 +54,26 @@ impl Console
 		// Assigning registers
 
 		// dr
-		let first_arg = command.next().parse::<i32>().expect("DR not able to be read to integer");
+		let first_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
 		match first_arg
 		{
-			0..=mem_space => self.dr = first_arg,
+			0..=mem_space => self.dr = first_arg as u8, // as a note, this could cause overflow issue, but thats by design (to match hardware)
 			_ => panic!("Value invalid or out of range!"),
 		}
 
 		// s1
-		let second_arg = command.next().parse::<i32>().expect("DR not able to be read to integer");
+		let second_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
 		match second_arg
 		{
-			0..=mem_space => self.dr = second_arg,
+			0..=mem_space => self.dr = second_arg as u8, // same comment as first_aug
 			_ => panic!("Value invalid or out of range!"),
 		}
 
 		// s2
-		let third_arg = command.next().parse::<i32>().expect("DR not able to be read to integer");
+		let third_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
 		match third_arg
 		{
-			0..=mem_space => self.dr = third_arg,
+			0..=mem_space => self.dr = third_arg as u8, // same comment as first_aug
 			_ => panic!("Value invalid or out of range!"),
 		}
 
@@ -90,7 +90,7 @@ impl Console
 }
 
 /// ************** ASSEMBLY COMMAND HANDLING ************ ///
-
+#[derive(PartialEq)] // Can implement trait for practice later
 pub enum AsbType
 {
 	NOT,

@@ -2,7 +2,7 @@ mod register;
 
 pub struct MemIOInterface
 {
-    mem: [memory::Register; 10],
+    mem: [register::Register; 10],
 }
 
 impl MemIOInterface
@@ -11,40 +11,40 @@ impl MemIOInterface
     {
         MemIOInterface
         {
-            mem: [memory::Register::new(); 10],
+            mem: [register::Register::new(); 10],
         }
     }
 
     // dr s1 and s2 returned
-    pub fn operands(&self, instruction: &super::console::Console) -> (u8, u8)
+    pub fn operands(&mut self, instruction: &super::console::Console) -> (u8, u8)
     {
-        (mem[instruction.s1].val, mem[instruction.s2].val)
+        (self.mem[instruction.s1 as usize].val, self.mem[instruction.s2 as usize].val)
     }
 
     pub fn direct(&self, instruction: &super::console::Console, result: u8)
     {
-        mem[instruction.dr].val = result;
+        self.mem[instruction.dr as usize].val = result;
     }
 
-    pub fn amount_of_memory() -> i32
+    pub fn amount_of_memory(&self) -> i32
     {
-        mem.len()
+        self.mem.len() as i32
     }
 
 
     // FOR DEBUG ONLY
     pub fn to_screen(&self)
     {
-        println!("Register 0 has: {} ", mem[0]);
-        println!("Register 1 has: {} ", mem[1]);
-        println!("Register 2 has: {} ", mem[2]);
-        println!("Register 3 has: {} ", mem[3]);
-        println!("Register 4 has: {} ", mem[4]);
-        println!("Register 5 has: {} ", mem[5]);
-        println!("Register 6 has: {} ", mem[6]);
-        println!("Register 7 has: {} ", mem[7]);
-        println!("Register 8 has: {} ", mem[8]);
-        println!("Register 9 has: {} ", mem[9]);
+        println!("Register 0 has: {} ", self.mem[0].val);
+        println!("Register 1 has: {} ", self.mem[1].val);
+        println!("Register 2 has: {} ", self.mem[2].val);
+        println!("Register 3 has: {} ", self.mem[3].val);
+        println!("Register 4 has: {} ", self.mem[4].val);
+        println!("Register 5 has: {} ", self.mem[5].val);
+        println!("Register 6 has: {} ", self.mem[6].val);
+        println!("Register 7 has: {} ", self.mem[7].val);
+        println!("Register 8 has: {} ", self.mem[8].val);
+        println!("Register 9 has: {} ", self.mem[9].val);
     }
 
 }

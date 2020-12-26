@@ -1,7 +1,7 @@
 #[derive(Debug, Copy, Clone)]
 pub struct Register
 {
-	val: u8,
+	pub val: u8,
 }
 
 
