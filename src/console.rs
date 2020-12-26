@@ -29,7 +29,7 @@ impl Console
 		}
 	}
 
-	pub fn handle_in(&mut self, raw_line:  &str)
+	pub fn handle_in(&mut self, raw_line:  &str, mem_space: i32)
 	{
 		let mut command = raw_line.split_whitespace();
 		let mut skip = false;
@@ -50,6 +50,32 @@ impl Console
 
 		if skip { return; }
 
+
+		// Assigning registers
+
+		// dr
+		let first_arg = command.next().parse::<i32>().expect("DR not able to be read to integer");
+		match first_arg
+		{
+			0..=mem_space => self.dr = first_arg,
+			_ => panic!("Value invalid or out of range!"),
+		}
+
+		// s1
+		let second_arg = command.next().parse::<i32>().expect("DR not able to be read to integer");
+		match second_arg
+		{
+			0..=mem_space => self.dr = second_arg,
+			_ => panic!("Value invalid or out of range!"),
+		}
+
+		// s2
+		let third_arg = command.next().parse::<i32>().expect("DR not able to be read to integer");
+		match third_arg
+		{
+			0..=mem_space => self.dr = third_arg,
+			_ => panic!("Value invalid or out of range!"),
+		}
 
 	}
 

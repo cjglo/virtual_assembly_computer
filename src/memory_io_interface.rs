@@ -16,14 +16,19 @@ impl MemIOInterface
     }
 
     // dr s1 and s2 returned
-    pub fn operands(instruction: &super::console::Console) -> (u8, u8)
+    pub fn operands(&self, instruction: &super::console::Console) -> (u8, u8)
     {
         (mem[instruction.s1].val, mem[instruction.s2].val)
     }
 
-    pub fn direct(instruction: &super::console::Console, result: u8)
+    pub fn direct(&self, instruction: &super::console::Console, result: u8)
     {
         mem[instruction.dr].val = result;
+    }
+
+    pub fn amount_of_memory() -> i32
+    {
+        mem.len()
     }
 
 
@@ -41,6 +46,5 @@ impl MemIOInterface
         println!("Register 8 has: {} ", mem[8]);
         println!("Register 9 has: {} ", mem[9]);
     }
-
 
 }
