@@ -29,7 +29,7 @@ impl Console
 		}
 	}
 
-	pub fn handle_in(&mut self, raw_line:  &str, mem_space: i32)
+	pub fn handle_in(&mut self, raw_line:  &str)
 	{
 		let mut command = raw_line.split_whitespace();
 		let mut skip = false;
@@ -43,9 +43,9 @@ impl Console
 			// Main Assembly Code
 			Some("NOT") => { println!("Not command"); self.op = AsbType::NOT; }
 
-			Some(y) => println!("not implemented..."),
+			Some(_) => { println!("not implemented..."); self.op = AsbType::INV; skip = true; }
 
-			None => println!("nothing put in"),
+			None => { println!("Command Not Entered..."); self.op = AsbType::INV; skip = true; }
 		}
 
 		if skip { return; }
@@ -70,10 +70,10 @@ impl Console
 
 
 
-	pub fn save(&self)
-	{
+	// pub fn save(&self)
+	// {
 
-	}
+	// }
 	
 }
 

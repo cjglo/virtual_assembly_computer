@@ -8,14 +8,14 @@ pub struct ArithmeticLogicUnit
 
 impl ArithmeticLogicUnit
 {
+    // MAY INCLUDE THIS LATER, DO WE WANT TO BUILD AN ALU ITSELF?
+    // pub fn new() -> ArithmeticLogicUnit
+    // {
+    //     ArithmeticLogicUnit
+    //     {
 
-    pub fn new() -> ArithmeticLogicUnit
-    {
-        ArithmeticLogicUnit
-        {
-
-        }
-    }
+    //     }
+    // }
 
     pub fn execute(mioi: &mut memory_io_interface::MemIOInterface, con: &console::Console)
     {

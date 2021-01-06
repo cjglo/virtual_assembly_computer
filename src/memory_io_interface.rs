@@ -3,18 +3,18 @@ mod register;
 pub struct MemIOInterface
 {
     mem: [register::Register; 10], // change memory means change this array as well as below size
-    size: i32,
+    _size: i32,
 }
 
 impl MemIOInterface
 {
     pub fn new() -> MemIOInterface
     {
-        const change_mem_here: i32 = 10; // change memory size here!!!!
+        const CHANGE_MEM_HERE: i32 = 10; // change memory size here!!!!
         MemIOInterface
         {
-            mem: [register::Register::new(); change_mem_here as usize],
-            size: change_mem_here,
+            mem: [register::Register::new(); CHANGE_MEM_HERE as usize],
+            _size: CHANGE_MEM_HERE,
         }
     }
 
@@ -29,10 +29,11 @@ impl MemIOInterface
         self.mem[instruction.dr as usize].val = result;
     }
 
-    pub fn amount_of_memory(&self) -> i32
-    {
-        self.size
-    }
+    // Note: Below is no longer used, but kept in case of future use
+    // pub fn amount_of_memory(&self) -> i32
+    // {
+    //     self._size
+    // }
 
 
     // FOR DEBUG ONLY

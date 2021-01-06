@@ -10,8 +10,7 @@ fn main() {
 	let mut mioi = memory_io_interface::MemIOInterface::new();
 	// let alu = alu::ArithmeticLogicUnit::new();
 	let _file: &str;
-	// SET AMOUNT OF REGISTERS HERE
-	let mem_amount = mioi.amount_of_memory();
+	// Note: Set amount of registers inside mem_io
 
 	// Computer Run
 	loop 
@@ -21,8 +20,9 @@ fn main() {
 		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!");
 
 
-		con.handle_in(&asb_line, mem_amount);
+		con.handle_in(&asb_line);
 		if con.op == console::AsbType::BRK { break; }
+		if con.op == console::AsbType::INV { continue; }
 
 		alu::ArithmeticLogicUnit::execute(&mut mioi, &con);
 
