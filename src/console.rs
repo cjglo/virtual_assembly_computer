@@ -54,30 +54,56 @@ impl Console
 		// Assigning registers
 
 		// dr
-		let first_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
+		let first_arg = command.next(); // not sure if the multiple "let"s are good practice
+		let first_arg = match first_arg 
+		{
+			Some(arg) => arg,
+			None => { self.op = AsbType::INV; println!(".\nStd in not found\n."); return; }
+		};
+		let first_arg = first_arg.parse::<i32>();
+		let first_arg = match first_arg
+		{
+			Ok(arg) => arg,
+			Err(_e) => { self.op = AsbType::INV; println!(".\ndrive must be mem address (non-number error)\n."); return; }
+		};
 		self.dr = first_arg as u8;
 
 		// s1
-		let second_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
+		let second_arg = command.next();
+		let second_arg = match second_arg
+		{
+			Some(arg) => arg,
+			None => { self.op = AsbType::INV; println!(".\nStd in not found\n."); return; }
+		};
+		let second_arg = second_arg.parse::<i32>();
+		let second_arg = match second_arg
+		{
+			Ok(arg) => arg,
+			Err(_e) => { self.op = AsbType::INV; println!(".\ns1 must be mem address (non-number error)\n."); return; }
+		};
 		self.s1 = second_arg as u8;
 
 		// s2
-		let third_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
+		let third_arg = command.next();
+		let third_arg = match third_arg
+		{
+			Some(arg) => arg,
+			None => { self.op = AsbType::INV; println!(".\nStd in not found\n."); return; }
+		};
+		let third_arg = third_arg.parse::<i32>();
+		let third_arg = match third_arg
+		{
+			Ok(arg) => arg,
+			Err(_e) => { self.op = AsbType::INV; println!(".\ns2 must be mem address (non-number error)\n."); return; }
+		};
 		self.s2 = third_arg as u8;
 
 	}
 
-
-
-
-	// pub fn save(&self)
-	// {
-
-	// }
 	
 }
 
-/// ************** ASSEMBLY COMMAND HANDLING ************ ///
+/// ************** ASSEMBLY IMPL COMMANDS ************ ///
 #[derive(PartialEq)] // Can implement trait for practice later
 pub enum AsbType
 {

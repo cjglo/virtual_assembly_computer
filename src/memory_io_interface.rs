@@ -32,7 +32,7 @@ impl MemIOInterface
     // Note: Below is no longer used, but kept in case of future use
     // pub fn amount_of_memory(&self) -> i32
     // {
-    //     self._size
+    //    self._size
     // }
 
 
