@@ -14,11 +14,10 @@ fn main() {
 	// Note: Set amount of registers inside mem_io
 
 	// Computer Run
+	display::clear_screen();
+	display::window("NONE", &mioi);
 	loop 
 	{
-		display::clear_screen();
-		display::window();
-
 		let mut asb_line = String::new();
 		asb_line.clear();
 		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!");
