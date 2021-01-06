@@ -55,27 +55,15 @@ impl Console
 
 		// dr
 		let first_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
-		match first_arg
-		{
-			0..=mem_space => self.dr = first_arg as u8, // as a note, this could cause overflow issue, but thats by design (to match hardware)
-			_ => panic!("Value invalid or out of range!"),
-		}
+		self.dr = first_arg as u8;
 
 		// s1
 		let second_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
-		match second_arg
-		{
-			0..=mem_space => self.dr = second_arg as u8, // same comment as first_aug
-			_ => panic!("Value invalid or out of range!"),
-		}
+		self.s1 = second_arg as u8;
 
 		// s2
 		let third_arg = command.next().unwrap().parse::<i32>().expect("DR not able to be read to integer");
-		match third_arg
-		{
-			0..=mem_space => self.dr = third_arg as u8, // same comment as first_aug
-			_ => panic!("Value invalid or out of range!"),
-		}
+		self.s2 = third_arg as u8;
 
 	}
 
