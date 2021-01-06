@@ -1,6 +1,7 @@
 mod memory_io_interface;
 mod console;
 mod alu;
+mod display;
 use std::io;
 
 fn main() {
@@ -15,6 +16,9 @@ fn main() {
 	// Computer Run
 	loop 
 	{
+		display::clear_screen();
+		display::window();
+
 		let mut asb_line = String::new();
 		asb_line.clear();
 		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!");
@@ -39,4 +43,3 @@ fn boot_up() -> console::Console
 {
 	console::Console::new("no file")
 }
-
