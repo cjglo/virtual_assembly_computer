@@ -3,7 +3,7 @@ mod register;
 pub struct MemIOInterface
 {
     mem: [register::Register; 10], // change memory means change this array as well as below size
-    _size: i32,
+    size: i32,
 }
 
 impl MemIOInterface
@@ -14,7 +14,7 @@ impl MemIOInterface
         MemIOInterface
         {
             mem: [register::Register::new(); CHANGE_MEM_HERE as usize],
-            _size: CHANGE_MEM_HERE,
+            size: CHANGE_MEM_HERE,
         }
     }
 
@@ -36,19 +36,11 @@ impl MemIOInterface
     // }
 
 
-    // FOR DEBUG ONLY
-    pub fn to_screen(&self)
+    pub fn give_registers(&self, i: usize) -> u8
     {
-        println!("Register 0 has: {} ", self.mem[0].val);
-        println!("Register 1 has: {} ", self.mem[1].val);
-        println!("Register 2 has: {} ", self.mem[2].val);
-        println!("Register 3 has: {} ", self.mem[3].val);
-        println!("Register 4 has: {} ", self.mem[4].val);
-        println!("Register 5 has: {} ", self.mem[5].val);
-        println!("Register 6 has: {} ", self.mem[6].val);
-        println!("Register 7 has: {} ", self.mem[7].val);
-        println!("Register 8 has: {} ", self.mem[8].val);
-        println!("Register 9 has: {} ", self.mem[9].val);
+        self.mem[i].val
     }
+
+
 
 }

@@ -43,12 +43,12 @@ impl ArithmeticLogicUnit
 
     fn add()
     {
-
+        // BIG NOTE: NEED TO ALLOW OVERFLOW HERE! VARIABLES WILL NOT DO IT NATURALLY
     }
 
     fn sub()
     {
-
+        // BIG NOTE: NEED TO ALLOW OVERFLOW HERE! VARIABLES WILL NOT DO IT NATURALLY
     }
 
 
