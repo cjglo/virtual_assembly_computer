@@ -1,29 +1,29 @@
-use std::process::Command;
-
+// use std::process::Command;
 
 
 pub fn clear_screen()
 {
     println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!(".\nBeginning VAC\n.\n.");
+    println!(".\nBeginning VAC in Terminal\n.\n.");
     
 }
 
-pub fn window(last_command: &str, reg: &super::memory_io_interface::MemIOInterface)
-{
+pub fn window(last_command: &str, mioi: &super::memory_io_interface::MemIOInterface)
+{   
+    println!("\n\n\n\n\n\n");
     println!("################################################################################");
     println!("################################################################################");
     println!("# Virtual Assebmly Computer - v0.1                                             #");
     println!("#                                                                              #");
     println!("#==============================================================================#");
-    println!("# R1:{0:#10b} ||  R2: {1:#10b} || R3:{2:#10b}    ||                      #", mioi.mem[0].val, 10, 255);
-    println!("# R4:{0:#10b} ||  R5: {1:#10b} ||  R6:{2:#10b}    ||                     #", 0, 2, 7);
-    println!("# R7:{0:#10b} ||  R8: {1:#10b} ||  R9:{2:#10b}   ||                      #", 1, 2, 203);
-    println!("# R10:{0:#10b} ||                                                             #", 80);
+    println!("# R0:{0:10b} ||  R1: {1:10b} || R2:{2:10b}    ||                      #", mioi.give_registers(0), mioi.give_registers(1), mioi.give_registers(2));
+    println!("# R3:{0:10b} ||  R4: {1:10b} ||  R5:{2:10b}   ||                     #", mioi.give_registers(3), mioi.give_registers(4), mioi.give_registers(5));
+    println!("# R6:{0:10b} ||  R7: {1:10b} ||  R8:{2:10b}   ||                      #", mioi.give_registers(6), mioi.give_registers(7), mioi.give_registers(8));
+    println!("# R9:{0:10b} ||                                                             #", mioi.give_registers(9));
     println!("#==============================================================================#");
     println!("#  Registers above, Assembly Commands in Manual (will be impl on command)      #");
     println!("#                                                                              #");
-    println!("#  Last Command: {}                                      ", last_command);
+    println!("#==> Last Command: {}                                    ", last_command);
     println!("#                                                                              #");
     println!("#  Current Instruction Address: {}                #", "(Not Implemented, No File Read)");
     println!("#  Type Assembly Command Below...                                              #");

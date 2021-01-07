@@ -25,12 +25,14 @@ fn main() {
 
 		con.handle_in(&asb_line);
 		if con.op == console::AsbType::BRK { break; }
-		if con.op == console::AsbType::INV { continue; }
+		if con.op == console::AsbType::INV {  }
+		else
+		{
+			alu::ArithmeticLogicUnit::execute(&mut mioi, &con);
+		}
 
-		alu::ArithmeticLogicUnit::execute(&mut mioi, &con);
-
-		// FOR DEBUG ONLY CURRENTLY:
-		mioi.to_screen();
+		// display
+		display::window(&asb_line, &mioi);
 	}
 
 	// mioi.shut_down();

@@ -36,9 +36,9 @@ impl MemIOInterface
     // }
 
 
-    pub fn give_registers(&self, i: u8) -> u8
+    pub fn give_registers(&self, i: usize) -> u8
     {
-        self.mem[]
+        self.mem[i].val
     }
 
 
