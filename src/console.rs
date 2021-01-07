@@ -38,6 +38,7 @@ impl Console
 			2 => Null Command
 			3 => dr, s1, or s2 not found
 			4 => dr, s1, or s2 were nonnumeric address
+			5 => default display value and used for break
 		*/
 
 		let mut command = raw_line.split_whitespace();
@@ -47,7 +48,7 @@ impl Console
 		match command.next()
 		{
 			// exit command
-			Some("BREAK") => { self.op = AsbType::BRK; skip = true; }
+			Some("BREAK") => { self.op = AsbType::BRK; return 5;  }
 
 			// Main Assembly Code
 			Some("NOT") => { self.op = AsbType::NOT; }
