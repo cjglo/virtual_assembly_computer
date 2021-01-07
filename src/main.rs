@@ -15,27 +15,25 @@ fn main() {
 
 	// Computer Run
 	display::clear_screen();
-	display::window("NONE", &mioi);
+	display::window("NONE", &mioi, 5); // default values for display (specifically, 5 displays no result of last command)
 	loop 
 	{
 		let mut asb_line = String::new();
 		asb_line.clear();
-		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!");
+		io::stdin().read_line(&mut asb_line).expect("Invalid Read of Standard In!"); // Reads command
 
-
-		con.handle_in(&asb_line);
-		if con.op == console::AsbType::BRK { break; }
-		if con.op == console::AsbType::INV {  }
-		else
-		{
-			alu::ArithmeticLogicUnit::execute(&mut mioi, &con);
-		}
+		// con: Console handles the command and seperates it into dr s1 and s2 (as its own fields)
+		let e_result = con.handle_in(&asb_line);
+		if con.op == console::AsbType::BRK { break; } 
+		if con.op == console::AsbType::INV { asb_line.pop(); display::window(&asb_line, &mioi, e_result); continue;  }
+		
+		alu::ArithmeticLogicUnit::execute(&mut mioi, &con); // handles register bitwise operations
 
 		// display
-		display::window(&asb_line, &mioi);
+		asb_line.pop();
+		display::window(&asb_line, &mioi, e_result); // displays registers and command
 	}
 
-	// mioi.shut_down();
 
 }
 

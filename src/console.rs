@@ -29,8 +29,17 @@ impl Console
 		}
 	}
 
-	pub fn handle_in(&mut self, raw_line:  &str)
-	{
+	pub fn handle_in(&mut self, raw_line:  &str) -> u8 // returns 0 for success and positives for error and type
+	{   
+		/*
+			Error Codes:
+			0 => Success
+			1 => Not Implemented Operation
+			2 => Null Command
+			3 => dr, s1, or s2 not found
+			4 => dr, s1, or s2 were nonnumeric address
+		*/
+
 		let mut command = raw_line.split_whitespace();
 		let mut skip = false;
 
@@ -38,17 +47,15 @@ impl Console
 		match command.next()
 		{
 			// exit command
-			Some("BREAK") => { println!("Break command entered..."); self.op = AsbType::BRK; skip = true; }
+			Some("BREAK") => { self.op = AsbType::BRK; skip = true; }
 
 			// Main Assembly Code
-			Some("NOT") => { println!("Not command"); self.op = AsbType::NOT; }
+			Some("NOT") => { self.op = AsbType::NOT; }
 
-			Some(_) => { println!("not implemented..."); self.op = AsbType::INV; skip = true; }
+			Some(_) => { self.op = AsbType::INV; skip = true; return 1; }
 
-			None => { println!("Command Not Entered..."); self.op = AsbType::INV; skip = true; }
+			None => { self.op = AsbType::INV; return 2; }
 		}
-
-		if skip { return; }
 
 
 		// Assigning registers
@@ -58,13 +65,13 @@ impl Console
 		let first_arg = match first_arg 
 		{
 			Some(arg) => arg,
-			None => { self.op = AsbType::INV; println!(".\nStd in not found\n."); return; }
+			None => { self.op = AsbType::INV; return 3; }
 		};
 		let first_arg = first_arg.parse::<i32>();
 		let first_arg = match first_arg
 		{
 			Ok(arg) => arg,
-			Err(_e) => { self.op = AsbType::INV; println!(".\ndrive must be mem address (non-number error)\n."); return; }
+			Err(_e) => { self.op = AsbType::INV; return 4; }
 		};
 		self.dr = first_arg as u8;
 
@@ -73,13 +80,13 @@ impl Console
 		let second_arg = match second_arg
 		{
 			Some(arg) => arg,
-			None => { self.op = AsbType::INV; println!(".\nStd in not found\n."); return; }
+			None => { self.op = AsbType::INV; return 3; }
 		};
 		let second_arg = second_arg.parse::<i32>();
 		let second_arg = match second_arg
 		{
 			Ok(arg) => arg,
-			Err(_e) => { self.op = AsbType::INV; println!(".\ns1 must be mem address (non-number error)\n."); return; }
+			Err(_e) => { self.op = AsbType::INV; return 4; }
 		};
 		self.s1 = second_arg as u8;
 
@@ -88,16 +95,17 @@ impl Console
 		let third_arg = match third_arg
 		{
 			Some(arg) => arg,
-			None => { self.op = AsbType::INV; println!(".\nStd in not found\n."); return; }
+			None => { self.op = AsbType::INV; return 3; }
 		};
 		let third_arg = third_arg.parse::<i32>();
 		let third_arg = match third_arg
 		{
 			Ok(arg) => arg,
-			Err(_e) => { self.op = AsbType::INV; println!(".\ns2 must be mem address (non-number error)\n."); return; }
+			Err(_e) => { self.op = AsbType::INV; return 4; }
 		};
 		self.s2 = third_arg as u8;
 
+		0 // success returned
 	}
 
 	

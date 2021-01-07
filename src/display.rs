@@ -8,9 +8,20 @@ pub fn clear_screen()
     
 }
 
-pub fn window(last_command: &str, mioi: &super::memory_io_interface::MemIOInterface)
+pub fn window(last_command: &str, mioi: &super::memory_io_interface::MemIOInterface, error: u8)
 {   
-    println!("\n\n\n\n\n\n");
+    let error_line = match error
+    {
+        0 => "Success                              ",
+        1 => "!!! Entered a Non-Implemented Command",
+        2 => "!!! Null Command (No Command Found)  ",
+        3 => "!!! Register or Arguments Not Found  ",
+        4 => "!!! DR or Arguments Were Not Numeric ",
+        _ => "                                     ",
+    };
+
+
+    println!("\n\n\n\n\n");
     println!("################################################################################");
     println!("################################################################################");
     println!("# Virtual Assebmly Computer - v0.1                                             #");
@@ -24,6 +35,7 @@ pub fn window(last_command: &str, mioi: &super::memory_io_interface::MemIOInterf
     println!("#  Registers above, Assembly Commands in Manual (will be impl on command)      #");
     println!("#                                                                              #");
     println!("#==> Last Command: {}                                    ", last_command);
+    println!("#==> Result: {}                           #", error_line);
     println!("#                                                                              #");
     println!("#  Current Instruction Address: {}                #", "(Not Implemented, No File Read)");
     println!("#  Type Assembly Command Below...                                              #");
