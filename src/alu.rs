@@ -41,9 +41,10 @@ impl ArithmeticLogicUnit
         !a
     }
 
-    fn add()
+    fn add( (a, b): (u8, u8) ) -> u8
     {
         // BIG NOTE: NEED TO ALLOW OVERFLOW HERE! VARIABLES WILL NOT DO IT NATURALLY
+
     }
 
     fn sub()
@@ -53,4 +54,36 @@ impl ArithmeticLogicUnit
 
 
 
+}
+
+
+struct BitForm
+{
+    curr_num: u8,
+    empty: bool,  // !!! Don't want this, gotta change it to counter so outputs 0s until 8 bits are filled
+}
+
+impl Iterator for BitForm  // !!! LOGIC IS STILL OFF!!!
+{
+    type Item = bool;
+
+    fn next(&mut self) -> Option<bool> // note: NO WAY TO RESET (as currently is)!
+    {
+        if self.curr_num % 2 != 0 
+        {
+            self.curr_num -= 1;
+            return Option<true>;
+        }
+        else if !empty
+        {
+            if curr_num == 0 { empty = true; }
+            self.curr_num /= 2;
+            return Option<false>;
+        }
+        else
+        {
+            None
+        }
+
+    }
 }
