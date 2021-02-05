@@ -1,20 +1,18 @@
 leftoff
 
-Right now there are a bunch of errors in terminal so fix typos.
+Need to add test module to each file
 
-Then we have NOT close to working.  Test that out.
+
+-- older
+
+
 
 To remind you: Memio handles interaction with memory, ALU does the calculations and commands Mio to change values,
 console is just the instruction broken into interpretable parts, and main is the loop that holds it together.
 
-A picture or graph of this for the repo would be nice.
 
-Also a display struct to hanlde the inevitable display.
 
 Then work on memory_io_interface to have commands work.  You could also try some dynamic memory or traits if can think of way.
 Naturally I think the velow comment might be way.  Have it send to vector of registers and io devices, and have them implent
 traits.
 
-
-great idea: Use traits to implement a way Register but also I/O devices can be hooked up.  Since they are treated the same in a computer 
-(with a h0 way to access) they are perfect for traits!

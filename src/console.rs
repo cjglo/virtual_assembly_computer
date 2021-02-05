@@ -5,7 +5,7 @@ use crate::console::AsbType::INV;
 
 pub struct Console
 {
-	// mem: [memory::Register; 10],
+	// pieces of assebly code: (operation, register directed to, first operand, second operand)
 	pub op: AsbType,
 	pub dr: u8,
 	pub s1: u8,
@@ -50,8 +50,11 @@ impl Console
 			// exit command
 			Some("BREAK") => { self.op = AsbType::BRK; return 5;  }
 
+
 			// Main Assembly Code
 			Some("NOT") => { self.op = AsbType::NOT; }
+
+			Some("ADD") => { self.op = AsbType::ADD; }
 
 			Some(_) => { self.op = AsbType::INV; skip = true; return 1; }
 

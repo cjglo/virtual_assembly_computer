@@ -34,6 +34,7 @@ fn main() {
 		display::window(&asb_line, &mioi, e_result); // displays registers and command
 	}
 
+	println!("Temporary Shutdown Text: Computer shutting down...");
 
 }
 
