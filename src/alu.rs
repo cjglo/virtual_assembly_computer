@@ -22,7 +22,7 @@ impl ArithmeticLogicUnit
         match con.op
         {
             console::AsbType::NOT => { let result = ArithmeticLogicUnit::not( mioi.operands(con) ); mioi.direct( con, result); },
-            console::AsbType::ADD => ArithmeticLogicUnit::add(), // not implemented
+            console::AsbType::ADD => { let result = ArithmeticLogicUnit::add( mioi.operands(con) ); mioi.direct( con, result); }, 
             console::AsbType::SUB => ArithmeticLogicUnit::sub(), // not implemented
             // ADD HERE!!
             // ----------
@@ -43,9 +43,22 @@ impl ArithmeticLogicUnit
 
     fn add( (a, b): (u8, u8) ) -> u8
     {
-        // BIG NOTE: NEED TO ALLOW OVERFLOW HERE! VARIABLES WILL NOT DO IT NATURALLY
+        let mut num1 = a;
+        let mut num2 = b;
+        let mut carry: u8;
 
+        while num2 != 0 {
+            carry = num1 & num2;
+            num1 = num1 ^ num2;
+
+            let (result, _) = (carry as u32).overflowing_shl(1);
+
+            num2 = result as u8;
+        }
+
+        num1
     }
+
 
     fn sub()
     {
@@ -57,33 +70,18 @@ impl ArithmeticLogicUnit
 }
 
 
-struct BitForm
-{
-    curr_num: u8,
-    empty: bool,  // !!! Don't want this, gotta change it to counter so outputs 0s until 8 bits are filled
-}
+#[cfg(test)] 
+mod tests {
 
-impl Iterator for BitForm  // !!! LOGIC IS STILL OFF!!!
-{
-    type Item = bool;
+    #[test]
+    fn overflow_100_plus_200() { // testing ADD operator with overflow
 
-    fn next(&mut self) -> Option<bool> // note: NO WAY TO RESET (as currently is)!
-    {
-        if self.curr_num % 2 != 0 
-        {
-            self.curr_num -= 1;
-            return Option<true>;
-        }
-        else if !empty
-        {
-            if curr_num == 0 { empty = true; }
-            self.curr_num /= 2;
-            return Option<false>;
-        }
-        else
-        {
-            None
-        }
+        let result = super::ArithmeticLogicUnit::add( (100, 200) );
 
+        println!("The result was: {}", result);
+
+        assert_eq!(result, 44);
     }
+
+
 }
