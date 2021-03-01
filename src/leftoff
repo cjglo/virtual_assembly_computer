@@ -2,17 +2,3 @@ leftoff
 
 Need to add test module to each file
 
-
--- older
-
-
-
-To remind you: Memio handles interaction with memory, ALU does the calculations and commands Mio to change values,
-console is just the instruction broken into interpretable parts, and main is the loop that holds it together.
-
-
-
-Then work on memory_io_interface to have commands work.  You could also try some dynamic memory or traits if can think of way.
-Naturally I think the velow comment might be way.  Have it send to vector of registers and io devices, and have them implent
-traits.
-

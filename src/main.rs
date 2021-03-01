@@ -6,11 +6,12 @@ use std::io;
 
 fn main() {
 
+	let _file: &str; // not yet implemented
+
 	// Computer Set Up of Drivers
-	let mut con = boot_up();
+	let mut con = console::Console::new("no file");
 	let mut mioi = memory_io_interface::MemIOInterface::new();
-	// let alu = alu::ArithmeticLogicUnit::new();
-	let _file: &str;
+	
 	// Note: Set amount of registers inside mem_io
 
 	// Computer Run
@@ -38,8 +39,3 @@ fn main() {
 
 }
 
-
-fn boot_up() -> console::Console
-{
-	console::Console::new("no file")
-}
