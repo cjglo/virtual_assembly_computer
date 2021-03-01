@@ -1,3 +1,12 @@
 
-Assembly commands employed:
 
+Assembly commands:
+
+ADD DR R# R#    -  Bit Addition of Registers R# and R# into DR
+NOT DR R# _R#   -  Bit Not of REgister R# into DR (Second Register _R# not used)
+
+
+
+Command Format Example:
+
+NOT 0 1 2        ->      Not the bits inside register 1 and send them to register 0 (register 2 ignored, no second arguement for not)
